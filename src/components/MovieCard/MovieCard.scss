@@ -4,6 +4,11 @@
     background: $secondry-color;
     cursor: pointer;
     border-radius: 1rem;
+    transition: all 0.3s ease-out;
+}
+.card-item:hover{
+    transform: scale(1.03);
+    transition: all 0.2s ease-out;
 }
 .card-top{
     height: 300px;
