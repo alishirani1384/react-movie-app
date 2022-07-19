@@ -2,7 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { getAllMovies, getAllShows } from '../../features/movies/movieSlice';
 import MovieCard from '../MovieCard/MovieCard';
-import './MovieListing.scss'
+import './MovieListing.scss';
+import ReactLoading from 'react-loading';
 
 const MovieListing = () => {
   const movies = useSelector(getAllMovies);
@@ -15,18 +16,39 @@ const MovieListing = () => {
     <div className="movie-wrapper">
       <div className="movie-list">
         <h2>Movies</h2>
-        <div className="movie-container">
-          {renderMovies}
-        </div>
+        
+          {Object.keys(movies).length === 0 ? (
+            <ReactLoading
+              type={"spin"}
+              color={"blue"}
+              height={"20%"}
+              width={"20%"}
+            />
+          ) : (
+          <div className="movie-container">
+              { renderMovies }
+          </div>
+          )}
+        
       </div>
       <div className="show-list">
         <h2>Shows</h2>
-        <div className="movie-container">
-          {renderShows}
-        </div>
+        
+          {Object.keys(shows).length === 0 ? (
+            <ReactLoading
+              type={"spin"}
+              color={"blue"}
+              height={"20%"}
+              width={"20%"}
+            />
+          ) : (
+          <div className="movie-container">
+              {renderShows}
+          </div>  
+          )}
       </div>
     </div>
-  )
+  );
 }
 
 export default MovieListing

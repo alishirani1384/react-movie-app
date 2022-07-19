@@ -1,20 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import user from '../../image/icons8-male-user-96.png';
-import './Header.scss'
+import './Header.scss';
+import { useDispatch } from 'react-redux';
+import { fetchAsyncMovies, fetchAsyncSeries } from '../../features/movies/movieSlice';
 
 const Header = () => {
+  const [term, setTerm] = useState("");
+  const dispatch = useDispatch();
+  function submit(e) {
+    e.preventDefault()
+    dispatch(fetchAsyncSeries(term));
+    dispatch(fetchAsyncMovies(term));
+  }
+  
   return (
     <div className="header">
-      <Link to='/'>
+      <Link to="/">
         <h2 className="logo">Movie App</h2>
       </Link>
-      
-      <div className="user-image">
-        <img src={user} alt="user" />
+      <div className="search-box">
+        <form onSubmit={submit}>
+          <input type="text" placeholder='Search...' value={term} onChange={(e) => setTerm(e.target.value)} />
+        </form>
+        <i className='fa fa-search' onClick={submit}></i>
       </div>
     </div>
-  )
+  );
 }
 
 export default Header
