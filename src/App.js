@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.scss";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Header/Header";
@@ -8,14 +8,14 @@ import PageNotFound from "./components/PageNotFound/PageNotFound";
 
 
 function App() {
-
+const [text, setText] = useState('hey')
   return (
     <div className="App">
       <BrowserRouter>
-        <Header />
+        <Header setText={setText} />
         <div className="container">
           <Routes>  
-            <Route path="/" exact element={<Home />} />
+            <Route path="/" exact element={<Home text={text} />} />
             <Route path="/movie/:imdbID" element={<MovieDetails />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
